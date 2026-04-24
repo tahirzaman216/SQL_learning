@@ -1,0 +1,19 @@
+select *
+from employee_demographics;
+
+with cte_example as 
+(
+select employee_id, gender, birth_date
+from employee_demographics
+where birth_date > "1985-01-01"
+),
+cte_example2 as
+(
+select employee_id, salary
+from employee_salary
+where salary > 50000
+)
+select *
+from cte_example
+join cte_example2
+	on cte_example.employee_id = cte_example2.employee_id;
